@@ -6,9 +6,6 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
 
-/*
- * @author Chris Coughlan 2019
- */
 public class MainActivity extends AppCompatActivity {
     public static final int BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT = 1;
 

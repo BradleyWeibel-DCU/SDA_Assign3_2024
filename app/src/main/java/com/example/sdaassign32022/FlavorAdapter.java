@@ -15,12 +15,12 @@ package com.example.sdaassign32022;
 * limitations under the License.
 */
 
-
 /**
  * {@link FlavorAdapter} represents a single Android platform release.
  * Each object has 3 properties: name, version number, and image resource ID.
  * This is a basic arrayAdapter
  */
+
 public class FlavorAdapter {
 
     // Name of the Android version (e.g. Gingerbread, Honeycomb, Ice Cream Sandwich)

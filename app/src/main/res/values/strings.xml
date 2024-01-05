@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SDA Assign3 2022 Your Name</string>
+    <string name="app_name">SDA Assign3 2024 Bradley Weibel</string>
     <string-array name="ui_time_entries">
         <item>" 2"</item>
         <item>" 3"</item>
@@ -22,7 +22,7 @@
     <string name="to_email">my-tshirt@sda.ie</string>
     <string name="email_subject">Order Request </string>
     <string name="border">border</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

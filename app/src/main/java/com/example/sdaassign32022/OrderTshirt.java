@@ -1,6 +1,5 @@
 package com.example.sdaassign32022;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -16,16 +15,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
-
 
 /*
  * A simple {@link Fragment} subclass.
- * @author Chris Coughlan 2019
+ *
  */
-public class OrderTshirt extends Fragment {
 
+public class OrderTshirt extends Fragment {
 
     public OrderTshirt() {
         // Required empty public constructor
@@ -73,7 +70,6 @@ public class OrderTshirt extends Fragment {
             }
         });
 
-
         //initialise spinner using the integer array
         mSpinner = root.findViewById(R.id.spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -83,7 +79,6 @@ public class OrderTshirt extends Fragment {
 
         return root;
     }
-
 
     //Take a photo note the view is being passed so we can get context because it is a fragment.
     //update this to save the image so it can be sent via email
