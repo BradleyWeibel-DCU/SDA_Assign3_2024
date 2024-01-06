@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">SDA Assign3 2024 Bradley Weibel</string>
+
     <string-array name="ui_time_entries">
         <item>" 2"</item>
         <item>" 3"</item>
@@ -8,6 +9,14 @@
         <item>10</item>
         <item>14</item>
     </string-array>
+
+    <!-- Welcome fragment -->
+    <string name="welcome_msg"><b>Welcome to Temporal Apparels</b></string>
+    <string name="intro_one_msg"><b>The space with limitless designs.</b></string>
+    <string name="intro_two_msg">We pride ourselves on giving the customers exactly what they want.</string>
+    <string name="intro_three_msg"><b>How to shop with us:</b></string>
+    <string name="intro_four_msg">Choose your desired type of clothing in the PRODUCT LIST tab, and then choose your unique idea to be printed on it in the ORDER tab.</string>
+    <string name="intro_five_msg"><b>Please enjoy and go wild!</b></string>
 
     <string name="images_desc">Flavors Images</string>
     <string name="plc_version">version</string>

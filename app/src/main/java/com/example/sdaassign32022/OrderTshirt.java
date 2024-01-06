@@ -24,9 +24,8 @@ import androidx.fragment.app.Fragment;
 
 public class OrderTshirt extends Fragment {
 
-    public OrderTshirt() {
-        // Required empty public constructor
-    }
+    // Required empty public constructor
+    public OrderTshirt() { }
 
     //class wide variables
     private String mPhotoPath;
@@ -40,8 +39,7 @@ public class OrderTshirt extends Fragment {
     private static final String TAG = "OrderTshirt";
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment get the root view.
         final View root = inflater.inflate(R.layout.fragment_order_tshirt, container, false);

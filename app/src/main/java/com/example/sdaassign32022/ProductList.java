@@ -20,13 +20,11 @@ public class ProductList extends Fragment {
     private static final String TAG = "RecyclerViewActivity";
     private ArrayList<FlavorAdapter> mFlavor = new ArrayList<>();
 
-    public ProductList() {
-        // Required empty public constructor
-    }
+    // Required empty public constructor
+    public ProductList() { }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
         View root = inflater.inflate(R.layout.fragment_product_list, container, false);
