@@ -8,11 +8,11 @@
         android:id="@+id/imageItem"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/donut"
+        android:src="@drawable/t_shirt"
         android:contentDescription="@string/images_desc" />
 
     <TextView
-        android:id="@+id/flavorText"
+        android:id="@+id/shirtText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -20,20 +20,20 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="18dp"
         android:layout_toEndOf="@+id/imageItem"
-        android:text="@string/plc_flavor"
+        android:text="@string/plc_shirt_type"
         android:textColor="@color/TabText"
         android:textSize="17sp" />
 
     <TextView
-        android:id="@+id/flavorVers"
+        android:id="@+id/shirtPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/flavorText"
+        android:layout_below="@+id/shirtText"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="18dp"
         android:layout_toEndOf="@+id/imageItem"
-        android:text="@string/plc_version"
+        android:text="@string/plc_shirt_price"
         android:textColor="@color/TabText"
         android:textSize="17sp" />
 
