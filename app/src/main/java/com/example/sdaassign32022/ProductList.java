@@ -18,32 +18,33 @@ import java.util.ArrayList;
 public class ProductList extends Fragment {
 
     private static final String TAG = "RecyclerViewActivity";
-    private ArrayList<FlavorAdapter> mFlavor = new ArrayList<>();
+    private ArrayList<ShirtAdapter> shirtType = new ArrayList<>();
 
     // Required empty public constructor
     public ProductList() { }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
+        // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_product_list, container, false);
-        // Create an ArrayList of AndroidFlavor objects
-        mFlavor.add(new FlavorAdapter("Donut", "1.6", R.drawable.donut));
-        mFlavor.add(new FlavorAdapter("Eclair", "2.0-2.1", R.drawable.eclair));
-        mFlavor.add(new FlavorAdapter("Froyo", "2.2-2.2.3", R.drawable.froyo));
-        mFlavor.add(new FlavorAdapter("GingerBread", "2.3-2.3.7", R.drawable.gingerbread));
-        mFlavor.add(new FlavorAdapter("Honeycomb", "3.0-3.2.6", R.drawable.honeycomb));
-        mFlavor.add(new FlavorAdapter("Ice Cream Sandwich", "4.0-4.0.4", R.drawable.icecream));
-        mFlavor.add(new FlavorAdapter("Jelly Bean", "4.1-4.3.1", R.drawable.jellybean));
-        mFlavor.add(new FlavorAdapter("KitKat", "4.4-4.4.4", R.drawable.kitkat));
-        mFlavor.add(new FlavorAdapter("Lollipop", "5.0-5.1.1", R.drawable.lollipop));
-        mFlavor.add(new FlavorAdapter("Marshmallow", "6.0-6.0.1", R.drawable.marshmallow));
+        // Create an ArrayList of shirt type objects
+        shirtType.add(new ShirtAdapter("Tank Top", "$13", R.drawable.tank_top));
+        shirtType.add(new ShirtAdapter("Classic T-Shirt", "$15", R.drawable.t_shirt));
+        shirtType.add(new ShirtAdapter("V-Neck T-Shirt", "$15", R.drawable.v_neck));
+        shirtType.add(new ShirtAdapter("Slim Fit T-Shirt", "$15", R.drawable.t_shirt));
+        shirtType.add(new ShirtAdapter("Tall T-Shirt", "$17", R.drawable.long_shirt));
+        shirtType.add(new ShirtAdapter("Collared Shirt", "$17", R.drawable.collared_shirt));
+        shirtType.add(new ShirtAdapter("Long Sleeve T-Shirt", "$17", R.drawable.long_sleeve));
+        shirtType.add(new ShirtAdapter("Premium Q T-Shirt", "$18", R.drawable.t_shirt));
+        shirtType.add(new ShirtAdapter("X-Soft T-Shirt", "$18", R.drawable.t_shirt));
+        shirtType.add(new ShirtAdapter("Heavy Duty T-Shirt", "$18", R.drawable.heavy_shirt));
+        shirtType.add(new ShirtAdapter("Workout T-Shirt", "$18", R.drawable.workout_shirt));
 
         //start it with the view
         Log.d(TAG, "Starting recycler view");
         RecyclerView recyclerView = root.findViewById(R.id.recyclerView_view);
-        FlavorViewAdapter recyclerViewAdapter = new FlavorViewAdapter(getContext(), mFlavor);
+        ShirtViewAdapter recyclerViewAdapter = new ShirtViewAdapter(getContext(), shirtType);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 

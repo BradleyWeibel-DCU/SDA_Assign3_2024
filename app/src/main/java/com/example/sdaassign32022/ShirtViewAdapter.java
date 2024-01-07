@@ -23,20 +23,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
-public class FlavorViewAdapter extends RecyclerView.Adapter<FlavorViewAdapter.ViewHolder> {
+public class ShirtViewAdapter extends RecyclerView.Adapter<ShirtViewAdapter.ViewHolder> {
     private static final String TAG = "RecyclerViewAdapter";
     private Context mNewContext;
 
     //add array for each item\
-    private ArrayList<FlavorAdapter> mFlavors;
+    private ArrayList<ShirtAdapter> mShirts;
 
-    FlavorViewAdapter(Context mNewContext, ArrayList<FlavorAdapter> mflavor) {
+    ShirtViewAdapter(Context mNewContext, ArrayList<ShirtAdapter> mshirt) {
         this.mNewContext = mNewContext;
-        this.mFlavors = mflavor;
+        this.mShirts = mshirt;
     }
 
     //declare methods
@@ -51,18 +52,27 @@ public class FlavorViewAdapter extends RecyclerView.Adapter<FlavorViewAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int position) {
         Log.d(TAG, "onBindViewHolder: was called");
 
-        viewHolder.imageText.setText(mFlavors.get(position).getVersionNumber());
-        viewHolder.versionText.setText(mFlavors.get(position).getVersionName());
-        viewHolder.imageItem.setImageResource(mFlavors.get(position).getImageResourceId());
+        viewHolder.imageText.setText(mShirts.get(position).getShirtPrice());
+        viewHolder.versionText.setText(mShirts.get(position).getShirtName());
+        viewHolder.imageItem.setImageResource(mShirts.get(position).getImageResourceId());
 
+        // set listener for when user clicks a shirt entry in the list
+        viewHolder.itemParentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // User clicks a shirt entry in the list
+                // Show toastr message to user
+                Toast.makeText(mNewContext, viewHolder.versionText.getText(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return mFlavors.size();
+        return mShirts.size();
     }
 
-    //viewholder class
+    // viewholder class
     class ViewHolder extends RecyclerView.ViewHolder{
 
         ImageView imageItem;
