@@ -23,10 +23,10 @@ package com.example.sdaassign32022;
 
 public class ShirtAdapter {
 
-    // Name of the Shirt type (e.g. classic, tank top, premium, etc)
+    // T-Shirt type (e.g. classic, tank top, premium, etc)
     private String mShirtName;
 
-    // T-Shirt price (e.g. 15, 17, 18)
+    // T-Shirt price (e.g. 13, 15, 17, 18)
     private String mShirtPrice;
 
     // Drawable resource ID
@@ -34,38 +34,31 @@ public class ShirtAdapter {
 
     /*
      * Create a new ShirtAdapter object.
-     * @param vName is the name of the t-shirt type (e.g. classic)
-     * @param vPrice is the corresponding -t-shirt price (e.g. 15)
+     * @param vShirtType is the name of the t-shirt type (e.g. classic)
+     * @param vShirtPrice is the corresponding t-shirt price (e.g. 15)
      * @param image is drawable reference ID that corresponds to the t-shirt
-     *
-     * */
-    public ShirtAdapter(String vName, String vNumber, int imageResourceId)
+     */
+
+    public ShirtAdapter(String vShirtType, String vShirtPrice, int imageResourceId)
     {
-        mShirtName = vName;
-        mShirtPrice = vNumber;
+        mShirtName = vShirtType;
+        mShirtPrice = vShirtPrice;
         mImageResourceId = imageResourceId;
     }
 
-    /**
-     * Get the name of the t-shirt
-     */
+    // Get the name of the t-shirt
     public String getShirtName() {
         return mShirtName;
     }
 
-    /**
-     * Get the t-shirt price
-     */
+    // Get the t-shirt price
     public String getShirtPrice() {
         return mShirtPrice;
     }
 
-    /**
-     * Get the image resource ID
-     */
+    // Get the image resource ID
     public int getImageResourceId() {
         return mImageResourceId;
     }
-
 }
 
