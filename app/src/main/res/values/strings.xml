@@ -25,7 +25,8 @@
     <string name="placeholder">Order T shirt</string>
 
     <!-- Order fragment values -->
-    <string name="customer_name">Name</string>
+    <string name="customer_name">Name *</string>
+    <string name="name_missing_error">Please enter a name</string>
     <string name="order_message_1">Please find my order attached</string>
     <string name="order_message_collect">I will collect it in&#160;</string>
     <string name="order_message_end">Regards</string>

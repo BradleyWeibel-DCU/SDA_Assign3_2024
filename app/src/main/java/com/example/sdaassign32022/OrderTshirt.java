@@ -1,6 +1,10 @@
 package com.example.sdaassign32022;
 
+import static android.app.Activity.RESULT_OK;
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.InputType;
@@ -15,12 +19,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-
-/*
- * A simple {@link Fragment} subclass.
- *
- */
+import java.io.File;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class OrderTshirt extends Fragment {
 
@@ -28,13 +33,13 @@ public class OrderTshirt extends Fragment {
     public OrderTshirt() { }
 
     //class wide variables
-    private String mPhotoPath;
     private Spinner mSpinner;
     private EditText mCustomerName;
     private EditText meditDelivery;
     private ImageView mCameraImage;
 
     //static keys
+    private static int REQUEST_CODE = 100;
     private static final int REQUEST_TAKE_PHOTO = 2;
     private static final String TAG = "OrderTshirt";
 
@@ -78,19 +83,66 @@ public class OrderTshirt extends Fragment {
         return root;
     }
 
-    //Take a photo note the view is being passed so we can get context because it is a fragment.
-    //update this to save the image so it can be sent via email
+    // Open camera intent after clicking image in UI
     private void dispatchTakePictureIntent(View v)
     {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(v.getContext().getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            // Permission has been granted, proceed with image capture (and later saving)
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (takePictureIntent.resolveActivity(v.getContext().getPackageManager()) != null)
+                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+        }
+        else // Permission has not yet granted
+            askPermission();
+    }
+
+    // After a photo has been taken and the tick clicked in UI
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_TAKE_PHOTO)
+        {
+            if (resultCode == RESULT_OK) {
+                // Get image as Bitmap image
+                Bitmap cameraImage = (Bitmap) data.getExtras().get("data");
+                // Insert image into UI image object
+                mCameraImage.setImageBitmap(cameraImage);
+
+                // Create folder for images
+                // Location: Phone > Android > data > com.example.sdaassign32022 > files > DCIM > sdaa32024photos
+                File myDir = new File(getContext().getExternalFilesDir("DCIM"), "sdaa32024photos");
+                // If directory doesn't exist, create it
+                if (!myDir.exists())
+                    myDir.mkdirs();
+
+                // Name of photo
+                String photoName = "IMG_" + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".png";
+                // Determine if image already exists
+                File file = new File(myDir, photoName);
+                if (file.exists())
+                    file.delete(); // Delete if so
+
+                try {
+                    // Insert image into folder
+                    FileOutputStream out = new FileOutputStream(file);
+                    cameraImage.compress(Bitmap.CompressFormat.PNG, 100, out);
+                    // Cleanup
+                    out.flush();
+                    out.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
-    /*
-     * Returns the Email Body Message, update this to handle either collection or delivery
-     */
+    private void askPermission() {
+        ActivityCompat.requestPermissions(getActivity(), new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE);
+    }
+
+    // Returns the Email Body Message, update this to handle either collection or delivery
     private String createOrderSummary(View v)
     {
         String orderMessage = "";
@@ -109,19 +161,11 @@ public class OrderTshirt extends Fragment {
     //Update me to send an email
     private void sendEmail(View v)
     {
-        //check that Name is not empty, and ask do they want to continue
+        // Check that Name is not empty, and ask if they want to continue
         String customerName = mCustomerName.getText().toString();
         if (mCustomerName == null || customerName.equals(""))
-        {
-            Toast.makeText(getContext(), "Please enter your name", Toast.LENGTH_SHORT).show();
-
-            /* we can also use a dialog
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Notification!").setMessage("Customer Name not set.").setPositiveButton("OK", null).show();*/
-
-        } else {
-            Log.d(TAG, "sendEmail: should be sending an email with "+createOrderSummary(v));
-        }
+            Toast.makeText(getContext(), getString(R.string.name_missing_error), Toast.LENGTH_SHORT).show();
+        else
+            Log.d(TAG, "sendEmail: should be sending an email with "+ createOrderSummary(v));
     }
-
 }
