@@ -52,8 +52,8 @@ public class ShirtViewAdapter extends RecyclerView.Adapter<ShirtViewAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int position) {
         Log.d(TAG, "onBindViewHolder: was called");
 
-        viewHolder.imageText.setText(mShirts.get(position).getShirtPrice());
-        viewHolder.priceText.setText(mShirts.get(position).getShirtName());
+        viewHolder.imageText.setText(mShirts.get(position).getShirtName());
+        viewHolder.priceText.setText(mShirts.get(position).getShirtPrice());
         viewHolder.imageItem.setImageResource(mShirts.get(position).getImageResourceId());
 
         // set listener for when user clicks a shirt entry in the list
@@ -62,7 +62,7 @@ public class ShirtViewAdapter extends RecyclerView.Adapter<ShirtViewAdapter.View
             public void onClick(View view) {
                 // User clicks a shirt entry in the list
                 // Show toastr message to user
-                Toast.makeText(mNewContext, viewHolder.priceText.getText(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mNewContext, viewHolder.imageText.getText(), Toast.LENGTH_SHORT).show();
             }
         });
     }

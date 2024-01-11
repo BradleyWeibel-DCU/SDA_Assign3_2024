@@ -1,15 +1,6 @@
 <resources>
     <string name="app_name">SDA Assign3 2024 Bradley Weibel</string>
 
-    <string-array name="ui_time_entries">
-        <item>" 2"</item>
-        <item>" 3"</item>
-        <item>" 4"</item>
-        <item>" 5"</item>
-        <item>10</item>
-        <item>14</item>
-    </string-array>
-
     <!-- Welcome fragment -->
     <string name="welcome_msg"><b>Welcome to Temporal Apparels</b></string>
     <string name="intro_one_msg"><b>The space with limitless designs.</b></string>
@@ -24,16 +15,32 @@
     <string name="plc_shirt_type">shirt type</string>
     <string name="placeholder">Order T shirt</string>
 
-    <!-- Order fragment values -->
+    <!-- Order T-Shirt fragment values -->
     <string name="customer_name">Name *</string>
+    <string name="please_enter_name">Enter Your Name</string>
     <string name="name_missing_error">Please enter a name</string>
+    <string name="please_enter_address">Enter Your Delivery Address</string>
+    <string name="collection_in_days">For Collection in (days):</string>
     <string name="order_message_1">Please find my order attached</string>
+    <string name="image_text_pre_capture">Take photo for T-Shirt</string>
+    <string name="image_text_post_capture">Image to be printed</string>
+    <string name="submit_order">SUBMIT ORDER</string>
     <string name="order_message_collect">I will collect it in&#160;</string>
     <string name="order_message_end">Regards</string>
     <string name="notification_title">Notification!</string>
     <string name="to_email">my-tshirt@sda.ie</string>
     <string name="email_subject">Order Request </string>
     <string name="border">border</string>
+
+    <!-- Collection day options -->
+    <string-array name="ui_time_entries">
+        <item>" 2"</item>
+        <item>" 3"</item>
+        <item>" 4"</item>
+        <item>" 5"</item>
+        <item>10</item>
+        <item>14</item>
+    </string-array>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -32,13 +33,13 @@ public class OrderTshirt extends Fragment {
     // Required empty public constructor
     public OrderTshirt() { }
 
-    //class wide variables
+    // Class wide variables
     private Spinner mSpinner;
-    private EditText mCustomerName;
-    private EditText meditDelivery;
+    private TextView mImageTextView;
+    private EditText mCustomerName, meditDelivery;
     private ImageView mCameraImage;
 
-    //static keys
+    // Static keys
     private static int REQUEST_CODE = 100;
     private static final int REQUEST_TAKE_PHOTO = 2;
     private static final String TAG = "OrderTshirt";
@@ -49,6 +50,7 @@ public class OrderTshirt extends Fragment {
         // Inflate the layout for this fragment get the root view.
         final View root = inflater.inflate(R.layout.fragment_order_tshirt, container, false);
 
+        mImageTextView = root.findViewById(R.id.imageText);
         mCustomerName = root.findViewById(R.id.editCustomer);
         meditDelivery = root.findViewById(R.id.editDeliver);
         meditDelivery.setImeOptions(EditorInfo.IME_ACTION_DONE);
@@ -102,9 +104,8 @@ public class OrderTshirt extends Fragment {
     {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQUEST_TAKE_PHOTO)
+        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK)
         {
-            if (resultCode == RESULT_OK) {
                 // Get image as Bitmap image
                 Bitmap cameraImage = (Bitmap) data.getExtras().get("data");
                 // Insert image into UI image object
@@ -124,16 +125,18 @@ public class OrderTshirt extends Fragment {
                 if (file.exists())
                     file.delete(); // Delete if so
 
-                try {
-                    // Insert image into folder
-                    FileOutputStream out = new FileOutputStream(file);
-                    cameraImage.compress(Bitmap.CompressFormat.PNG, 100, out);
-                    // Cleanup
-                    out.flush();
-                    out.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            try {
+                // Insert image into folder
+                FileOutputStream out = new FileOutputStream(file);
+                cameraImage.compress(Bitmap.CompressFormat.PNG, 100, out);
+                // Cleanup
+                out.flush();
+                out.close();
+
+                // Change text in TextView
+                mImageTextView.setText(R.string.image_text_post_capture);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
