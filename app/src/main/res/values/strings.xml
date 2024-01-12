@@ -9,6 +9,25 @@
     <string name="intro_four_msg">Choose your desired type of clothing in the PRODUCT LIST tab, and then choose your unique idea to be printed on it in the ORDER tab.</string>
     <string name="intro_five_msg"><b>Please enjoy and go wild!</b></string>
 
+    <!-- Shirt types -->
+    <string name="tank_top">Tank Top</string>
+    <string name="classic">Classic T-Shirt</string>
+    <string name="v_neck">V-Neck T-Shirt</string>
+    <string name="slim_fit">Slim Fit T-Shirt</string>
+    <string name="tall">Tall T-Shirt</string>
+    <string name="collared">Collared Shirt</string>
+    <string name="long_sleeve">Long Sleeve T-Shirt</string>
+    <string name="premium">Premium Q T-Shirt</string>
+    <string name="soft">X-Soft T-Shirt</string>
+    <string name="heavy_duty">Heavy Duty T-Shirt</string>
+    <string name="workout">Workout T-Shirt</string>
+
+    <!-- Shirt prices -->
+    <string name="thirteen_dollars">$13</string>
+    <string name="fifteen_dollars">$15</string>
+    <string name="seventeen_dollars">$17</string>
+    <string name="eighteen_dollars">$18</string>
+
     <!-- Recycle shirt entries fragment -->
     <string name="images_desc">Flavors Images</string>
     <string name="plc_shirt_price">price</string>
@@ -23,6 +42,8 @@
     <string name="delivery_option_error">Please insert a delivery address</string>
     <string name="please_enter_address">Enter Your Delivery Address</string>
     <string name="collection_in_days">For Collection in (days):</string>
+    <string name="shirt_type_order">Type of shirt(s):</string>
+    <string name="shirt_amount_order">Amount of shirts:</string>
     <string name="image_text_pre_capture">Take photo for T-Shirt</string>
     <string name="image_text_post_capture">Image to be printed</string>
     <string name="choose_radio_option">T-Shirt order to be:</string>
@@ -42,11 +63,39 @@
         <item>14</item>
     </string-array>
 
+    <!-- Shirt type and price options -->
+    <string-array name="ui_shirt_type_entries">
+        <item>Tank Top - $13</item>
+        <item>Classic T-Shirt - $15</item>
+        <item>V-Neck T-Shirt - $15</item>
+        <item>Slim Fit T-Shirt - $15</item>
+        <item>Tall T-Shirt - $17</item>
+        <item>Collared Shirt - $17</item>
+        <item>Long Sleeve T-Shirt - $17</item>
+        <item>Premium Q T-Shirt - $18</item>
+        <item>X-Soft T-Shirt - $18</item>
+        <item>Heavy Duty T-Shirt - $18</item>
+        <item>Workout T-Shirt - $18</item>
+    </string-array>
+
+    <!-- Shirt amount options -->
+    <string-array name="ui_order_amount_entries">
+        <item>" 1"</item>
+        <item>" 2"</item>
+        <item>" 3"</item>
+        <item>" 4"</item>
+        <item>" 5"</item>
+        <item>10</item>
+        <item>15</item>
+    </string-array>
+
     <!-- Email strings -->
     <string name="email_address">shirts@temporalapparels.com</string>
     <string name="email_order_subject">Order request/details</string>
     <string name="order_greeting">Hi,</string>
-    <string name="order_message_1">Please find my order attached.</string>
+    <string name="order_type">Order type:</string>
+    <string name="order_amount">Order amount:</string>
+    <string name="order_message_1">Please find my order photo attached and details below.</string>
     <string name="order_message_deliver">Please deliver my order to the following address: </string>
     <string name="order_message_collect">I will collect it in&#160;</string>
     <string name="order_message_days">days.</string>

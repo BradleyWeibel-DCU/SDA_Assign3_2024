@@ -38,7 +38,7 @@ public class OrderTshirt extends Fragment {
     public OrderTshirt() { }
 
     // Class wide variables
-    private Spinner mSpinner;
+    private Spinner mCollectionDaysSpinner, mOrderTypeSpinner, mOrderAmountSpinner;
     private TextView mImageTextView, mCollectionTextView;
     private RadioGroup mRadioGroup;
     private RadioButton mDeliverBtn, chosenRadioButton;
@@ -64,7 +64,9 @@ public class OrderTshirt extends Fragment {
         mCustomerName = root.findViewById(R.id.editCustomer);
         mEditDelivery = root.findViewById(R.id.editDeliveryAddress);
         mCollectionTextView = root.findViewById(R.id.collectTextView);
-        mSpinner = root.findViewById(R.id.spinner);
+        mCollectionDaysSpinner = root.findViewById(R.id.spinnerCollectionDays);
+        mOrderTypeSpinner = root.findViewById(R.id.spinnerOrderType);
+        mOrderAmountSpinner = root.findViewById(R.id.spinnerOrderAmount);
         mCameraImage = root.findViewById(R.id.imageView);
         mSendButton = root.findViewById(R.id.sendButton);
 
@@ -113,11 +115,21 @@ public class OrderTshirt extends Fragment {
             }
         });
 
-        // Set UI spinner using the integer array
-        // Create an ArrayAdapter using the string array and a default spinner layout
+        // Spinners handling
+        // Collection days spinner using the integer array
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(root.getContext(), R.array.ui_time_entries, R.layout.spinner_days);
-        mSpinner.setAdapter(adapter);
-        mSpinner.setEnabled(true);
+        mCollectionDaysSpinner.setAdapter(adapter);
+        mCollectionDaysSpinner.setEnabled(true);
+
+        // Order Type spinner using array
+        ArrayAdapter<CharSequence> stringAdapter = ArrayAdapter.createFromResource(root.getContext(), R.array.ui_shirt_type_entries, R.layout.spinner_type);
+        mOrderTypeSpinner.setAdapter(stringAdapter);
+        mOrderTypeSpinner.setEnabled(true);
+
+        // Order Amount spinner using array
+        adapter = ArrayAdapter.createFromResource(root.getContext(), R.array.ui_order_amount_entries, R.layout.spinner_amount);
+        mOrderAmountSpinner.setAdapter(adapter);
+        mOrderAmountSpinner.setEnabled(true);
 
         return root;
     }
@@ -134,11 +146,11 @@ public class OrderTshirt extends Fragment {
 
     private void showCollectionDetails() {
         mCollectionTextView.setVisibility(View.VISIBLE);
-        mSpinner.setVisibility(View.VISIBLE);
+        mCollectionDaysSpinner.setVisibility(View.VISIBLE);
     }
     private void hideCollectionDetails() {
         mCollectionTextView.setVisibility(View.INVISIBLE);
-        mSpinner.setVisibility(View.INVISIBLE);
+        mCollectionDaysSpinner.setVisibility(View.INVISIBLE);
     }
 
     // Open camera intent after clicking image in UI
@@ -250,7 +262,10 @@ public class OrderTshirt extends Fragment {
     private String createEmailBody()
     {
         String orderMessage = "";
-        orderMessage += getString(R.string.order_greeting) + "\n" + "\n" + getString(R.string.order_message_1);
+        orderMessage += getString(R.string.order_greeting) + "\n" + "\n" + getString(R.string.order_message_1) + "\n";
+        orderMessage += "\n" + getString(R.string.order_type) + " " + mOrderTypeSpinner.getSelectedItem().toString() + ".";
+        orderMessage += "\n" + getString(R.string.order_amount) + " " + mOrderAmountSpinner.getSelectedItem().toString() + ".";
+        orderMessage += "\n";
 
         // Determine if order is to be delivered or collected
         if (chosenRadioButton.getText().toString() == mDeliverBtn.getText())
@@ -263,8 +278,9 @@ public class OrderTshirt extends Fragment {
         else
         {
             // Order is to be collected
-            orderMessage += "\n" + getString(R.string.order_message_collect) + mSpinner.getSelectedItem().toString() + " " + getString(R.string.order_message_days);
+            orderMessage += "\n" + getString(R.string.order_message_collect) + mCollectionDaysSpinner.getSelectedItem().toString() + " " + getString(R.string.order_message_days);
         }
+
         // Final text of email body
         orderMessage += "\n" + "\n" + getString(R.string.order_message_end) + "\n" + mCustomerName.getText().toString() + ".";
 
