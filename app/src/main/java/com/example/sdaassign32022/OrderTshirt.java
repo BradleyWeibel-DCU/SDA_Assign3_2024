@@ -224,7 +224,7 @@ public class OrderTshirt extends Fragment {
         // Determine if all criteria are met for submission of order
         if (mCustomerName.getText().toString().equals(""))                                                                          // Is name field empty
             Toast.makeText(getContext(), getString(R.string.name_missing_error), Toast.LENGTH_SHORT).show();
-        else if (mImageTextView.getText().toString().equals(getString(R.string.image_text_pre_capture)))                            // Has a photo been chosen
+        else if (mImageTextView.getText().toString().equals(getString(R.string.image_text_pre_capture)))                                              // Has a photo been chosen
             Toast.makeText(getContext(), getString(R.string.photo_missing_error), Toast.LENGTH_SHORT).show();
         else if (chosenRadioButton == null)                                                                                         // Is a order receive method choice missing
             Toast.makeText(getContext(), getString(R.string.radio_choice_missing_error), Toast.LENGTH_SHORT).show();
