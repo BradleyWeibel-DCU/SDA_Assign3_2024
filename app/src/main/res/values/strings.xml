@@ -19,11 +19,17 @@
     <string name="customer_name">Name *</string>
     <string name="please_enter_name">Enter Your Name</string>
     <string name="name_missing_error">Please enter a name</string>
+    <string name="photo_missing_error">Please take a photo</string>
+    <string name="radio_choice_missing_error">Please select a way of receiving your order</string>
+    <string name="delivery_option_error">Please insert a delivery address</string>
     <string name="please_enter_address">Enter Your Delivery Address</string>
     <string name="collection_in_days">For Collection in (days):</string>
     <string name="order_message_1">Please find my order attached</string>
     <string name="image_text_pre_capture">Take photo for T-Shirt</string>
     <string name="image_text_post_capture">Image to be printed</string>
+    <string name="choose_radio_option">T-Shirt order to be:</string>
+    <string name="delivery_option">Delivered</string>
+    <string name="collect_option">Collected</string>
     <string name="submit_order">SUBMIT ORDER</string>
     <string name="order_message_collect">I will collect it in&#160;</string>
     <string name="order_message_end">Regards</string>
