@@ -28,11 +28,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
-public class ShirtViewAdapter extends RecyclerView.Adapter<ShirtViewAdapter.ViewHolder> {
-    private static final String TAG = "RecyclerViewAdapter";
+public class ShirtViewAdapter extends RecyclerView.Adapter<ShirtViewAdapter.ViewHolder>
+{
     private Context mNewContext;
-
-    //add array for each item\
     private ArrayList<ShirtAdapter> mShirts;
 
     ShirtViewAdapter(Context mNewContext, ArrayList<ShirtAdapter> mshirt) {
@@ -40,7 +38,6 @@ public class ShirtViewAdapter extends RecyclerView.Adapter<ShirtViewAdapter.View
         this.mShirts = mshirt;
     }
 
-    //declare methods
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -49,9 +46,9 @@ public class ShirtViewAdapter extends RecyclerView.Adapter<ShirtViewAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int position) {
-        Log.d(TAG, "onBindViewHolder: was called");
-
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int position)
+    {
+        // Set values of individual entries in list
         viewHolder.imageText.setText(mShirts.get(position).getShirtName());
         viewHolder.priceText.setText(mShirts.get(position).getShirtPrice());
         viewHolder.imageItem.setImageResource(mShirts.get(position).getImageResourceId());
@@ -60,19 +57,19 @@ public class ShirtViewAdapter extends RecyclerView.Adapter<ShirtViewAdapter.View
         viewHolder.itemParentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // User clicks a shirt entry in the list
-                // Show toastr message to user
+                // User clicks a shirt entry in the list, show message with shirt type
                 Toast.makeText(mNewContext, viewHolder.imageText.getText(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
+    // Get amount of array entries
     @Override
     public int getItemCount() {
         return mShirts.size();
     }
 
-    // viewholder class
+    // ViewHolder class
     class ViewHolder extends RecyclerView.ViewHolder{
 
         ImageView imageItem;
@@ -83,12 +80,11 @@ public class ShirtViewAdapter extends RecyclerView.Adapter<ShirtViewAdapter.View
         ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            //grab the image, the text and the layout id's
+            // Map the entry's UI elements
             imageItem = itemView.findViewById(R.id.imageItem);
             imageText = itemView.findViewById(R.id.shirtText);
             priceText = itemView.findViewById(R.id.shirtPrice);
             itemParentLayout = itemView.findViewById(R.id.listItemLayout);
-
         }
     }
 }

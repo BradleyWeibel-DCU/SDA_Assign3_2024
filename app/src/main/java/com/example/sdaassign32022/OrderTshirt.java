@@ -70,6 +70,7 @@ public class OrderTshirt extends Fragment {
         mCameraImage = root.findViewById(R.id.imageView);
         mSendButton = root.findViewById(R.id.sendButton);
 
+        // UI Delivery address field handling
         mEditDelivery.setImeOptions(EditorInfo.IME_ACTION_DONE);
         mEditDelivery.setRawInputType(InputType.TYPE_CLASS_TEXT);
 

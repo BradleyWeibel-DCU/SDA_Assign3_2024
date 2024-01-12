@@ -10,14 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
-/*
- * A simple {@link Fragment} subclass.
- *
- */
+// A simple {@link Fragment} subclass.
 
 public class ProductList extends Fragment {
 
-    private static final String TAG = "RecyclerViewActivity";
     private ArrayList<ShirtAdapter> shirtType = new ArrayList<>();
 
     // Required empty public constructor
@@ -48,10 +44,11 @@ public class ProductList extends Fragment {
         shirtType.add(new ShirtAdapter(getString(R.string.heavy_duty), eighteen, R.drawable.heavy_shirt));
         shirtType.add(new ShirtAdapter(getString(R.string.workout), eighteen, R.drawable.workout_shirt));
 
-        //start it with the view
-        Log.d(TAG, "Starting recycler view");
+        // Map new variable to UI element for list
         RecyclerView recyclerView = root.findViewById(R.id.recyclerView_view);
+        // Call ShirtViewAdapter class to create the correct object from the array values
         ShirtViewAdapter recyclerViewAdapter = new ShirtViewAdapter(getContext(), shirtType);
+        // Finish UI
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 

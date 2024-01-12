@@ -29,10 +29,9 @@
     <string name="eighteen_dollars">$18</string>
 
     <!-- Recycle shirt entries fragment -->
-    <string name="images_desc">Flavors Images</string>
+    <string name="images_desc">Shirt Images</string>
     <string name="plc_shirt_price">price</string>
     <string name="plc_shirt_type">shirt type</string>
-    <string name="placeholder">Order T shirt</string>
 
     <!-- Order T-Shirt fragment values -->
     <string name="please_enter_name">Enter Your Name</string>
@@ -50,7 +49,6 @@
     <string name="delivery_option">Delivered</string>
     <string name="collect_option">Collected</string>
     <string name="submit_order">SUBMIT ORDER</string>
-    <string name="notification_title">Notification!</string>
     <string name="border">border</string>
 
     <!-- Collection day options -->
@@ -101,7 +99,5 @@
     <string name="order_message_days">days.</string>
     <string name="order_message_end">Regards,</string>
     <string name="errorMessageEmailAppNotFound">No email app has been found on this device</string>
-
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
