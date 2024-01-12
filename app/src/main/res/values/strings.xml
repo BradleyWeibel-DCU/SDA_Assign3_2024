@@ -16,7 +16,6 @@
     <string name="placeholder">Order T shirt</string>
 
     <!-- Order T-Shirt fragment values -->
-    <string name="customer_name">Name *</string>
     <string name="please_enter_name">Enter Your Name</string>
     <string name="name_missing_error">Please enter a name</string>
     <string name="photo_missing_error">Please take a photo</string>
@@ -24,18 +23,13 @@
     <string name="delivery_option_error">Please insert a delivery address</string>
     <string name="please_enter_address">Enter Your Delivery Address</string>
     <string name="collection_in_days">For Collection in (days):</string>
-    <string name="order_message_1">Please find my order attached</string>
     <string name="image_text_pre_capture">Take photo for T-Shirt</string>
     <string name="image_text_post_capture">Image to be printed</string>
     <string name="choose_radio_option">T-Shirt order to be:</string>
     <string name="delivery_option">Delivered</string>
     <string name="collect_option">Collected</string>
     <string name="submit_order">SUBMIT ORDER</string>
-    <string name="order_message_collect">I will collect it in&#160;</string>
-    <string name="order_message_end">Regards</string>
     <string name="notification_title">Notification!</string>
-    <string name="to_email">my-tshirt@sda.ie</string>
-    <string name="email_subject">Order Request </string>
     <string name="border">border</string>
 
     <!-- Collection day options -->
@@ -47,6 +41,17 @@
         <item>10</item>
         <item>14</item>
     </string-array>
+
+    <!-- Email strings -->
+    <string name="email_address">shirts@temporalapparels.com</string>
+    <string name="email_order_subject">Order request/details</string>
+    <string name="order_greeting">Hi,</string>
+    <string name="order_message_1">Please find my order attached.</string>
+    <string name="order_message_deliver">Please deliver my order to the following address: </string>
+    <string name="order_message_collect">I will collect it in&#160;</string>
+    <string name="order_message_days">days.</string>
+    <string name="order_message_end">Regards,</string>
+    <string name="errorMessageEmailAppNotFound">No email app has been found on this device</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

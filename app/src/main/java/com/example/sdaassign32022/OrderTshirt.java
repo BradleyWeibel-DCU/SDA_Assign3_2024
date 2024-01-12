@@ -4,11 +4,12 @@ import static android.app.Activity.RESULT_OK;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class OrderTshirt extends Fragment {
 
@@ -43,11 +45,11 @@ public class OrderTshirt extends Fragment {
     private EditText mCustomerName, mEditDelivery;
     private ImageView mCameraImage;
     private Button mSendButton;
+    private Uri photo;
 
     // Static keys
     private static int REQUEST_CODE = 100;
     private static final int REQUEST_TAKE_PHOTO = 2;
-    private static final String TAG = "OrderTshirt";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -120,6 +122,25 @@ public class OrderTshirt extends Fragment {
         return root;
     }
 
+    private void showDeliveryEditField()
+    {
+        mEditDelivery.setVisibility(View.VISIBLE);
+    }
+    private void hideAndClearDeliveryEditField()
+    {
+        mEditDelivery.setVisibility(View.INVISIBLE);
+        mEditDelivery.setText("");
+    }
+
+    private void showCollectionDetails() {
+        mCollectionTextView.setVisibility(View.VISIBLE);
+        mSpinner.setVisibility(View.VISIBLE);
+    }
+    private void hideCollectionDetails() {
+        mCollectionTextView.setVisibility(View.INVISIBLE);
+        mSpinner.setVisibility(View.INVISIBLE);
+    }
+
     // Open camera intent after clicking image in UI
     private void dispatchTakePictureIntent(View v)
     {
@@ -165,6 +186,8 @@ public class OrderTshirt extends Fragment {
                 // Insert image into folder
                 FileOutputStream out = new FileOutputStream(file);
                 cameraImage.compress(Bitmap.CompressFormat.PNG, 100, out);
+                // Populate image variable
+                photo = Uri.fromFile(file);
                 // Cleanup
                 out.flush();
                 out.close();
@@ -182,22 +205,6 @@ public class OrderTshirt extends Fragment {
         ActivityCompat.requestPermissions(getActivity(), new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE);
     }
 
-    // Returns the Email Body Message, update this to handle either collection or delivery
-    private String createOrderSummary(View v)
-    {
-        String orderMessage = "";
-        String deliveryInstruction = mEditDelivery.getText().toString();
-        String customerName = getString(R.string.customer_name) + " " + mCustomerName.getText().toString();
-
-        orderMessage += customerName + "\n" + "\n" + getString(R.string.order_message_1);
-        orderMessage += "\n" + "Deliver my order to the following address: ";
-        orderMessage += "\n" + deliveryInstruction;
-        orderMessage += "\n" + getString(R.string.order_message_collect) + mSpinner.getSelectedItem().toString() + "days";
-        orderMessage += "\n" + getString(R.string.order_message_end) + "\n" + mCustomerName.getText().toString();
-
-        return orderMessage;
-    }
-
     // User wants to submit the order / send the email
     private void attemptSendEmail(View v)
     {
@@ -210,26 +217,57 @@ public class OrderTshirt extends Fragment {
             Toast.makeText(getContext(), getString(R.string.radio_choice_missing_error), Toast.LENGTH_SHORT).show();
         else if (chosenRadioButton.getText().toString() == mDeliverBtn.getText() && mEditDelivery.getText().toString().equals(""))  // Delivery method selected, but no delivery address inserted
             Toast.makeText(getContext(), getString(R.string.delivery_option_error), Toast.LENGTH_SHORT).show();
-        else // All good, send email
-            Log.d(TAG, "sendEmail: should be sending an email with "+ createOrderSummary(v));
+        else                                                                                                                        // All good, send email
+            createEmail();
     }
 
-    private void showDeliveryEditField()
+    // Create and populate the email, then open the email app
+    private void createEmail()
     {
-        mEditDelivery.setVisibility(View.VISIBLE);
-    }
-    private void hideAndClearDeliveryEditField()
-    {
-        mEditDelivery.setVisibility(View.INVISIBLE);
-        mEditDelivery.setText("");
+        // Declare intent to send an email (only email applications are selected with ACTION_SENDTO)
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+
+        // Set email data to be passed to the intent
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[] { getString(R.string.email_address) });
+        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_order_subject));
+        intent.putExtra(Intent.EXTRA_TEXT, createEmailBody());
+        intent.putExtra(Intent.EXTRA_STREAM, photo);
+
+        // Using mailto: only shows email applications to perform our action, not other apps like Google drive, etc
+        intent.setData(Uri.parse("mailto:"));
+
+        // Get list of email apps
+        final PackageManager packageManager = getContext().getPackageManager();
+        List<ResolveInfo> list = packageManager.queryIntentActivities(intent, 0);
+
+        if (list.size() == 0) // No email app has been found, show error message
+            Toast.makeText(getContext(), getString(R.string.errorMessageEmailAppNotFound), Toast.LENGTH_SHORT).show();
+        else
+            startActivity(intent);
     }
 
-    private void showCollectionDetails() {
-        mCollectionTextView.setVisibility(View.VISIBLE);
-        mSpinner.setVisibility(View.VISIBLE);
-    }
-    private void hideCollectionDetails() {
-        mCollectionTextView.setVisibility(View.INVISIBLE);
-        mSpinner.setVisibility(View.INVISIBLE);
+    // Returns the email body message
+    private String createEmailBody()
+    {
+        String orderMessage = "";
+        orderMessage += getString(R.string.order_greeting) + "\n" + "\n" + getString(R.string.order_message_1);
+
+        // Determine if order is to be delivered or collected
+        if (chosenRadioButton.getText().toString() == mDeliverBtn.getText())
+        {
+            // Order is to be delivered
+            orderMessage += "\n" + getString(R.string.order_message_deliver);
+            // Add user's delivery address
+            orderMessage += "\n" + mEditDelivery.getText().toString() + ".";
+        }
+        else
+        {
+            // Order is to be collected
+            orderMessage += "\n" + getString(R.string.order_message_collect) + mSpinner.getSelectedItem().toString() + " " + getString(R.string.order_message_days);
+        }
+        // Final text of email body
+        orderMessage += "\n" + "\n" + getString(R.string.order_message_end) + "\n" + mCustomerName.getText().toString() + ".";
+
+        return orderMessage;
     }
 }
