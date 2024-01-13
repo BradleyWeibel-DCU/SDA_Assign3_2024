@@ -32,6 +32,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author Bradley Weibel
+ * @version 1.0.0
+ */
 public class OrderTshirt extends Fragment {
 
     // Required empty public constructor
@@ -51,6 +55,23 @@ public class OrderTshirt extends Fragment {
     private static int REQUEST_CODE = 100;
     private static final int REQUEST_TAKE_PHOTO = 2;
 
+    /**
+     * Executes at start up of fragment.
+     * Maps class variables to UI elements.
+     * Sets up initial state of delivery and collection UI elements.
+     * Sets listeners on UI elements for clicks (image, radio buttons, send button).
+     * Setup spinners/dropdowns.
+     *
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return view Completed view is returned.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -80,6 +101,11 @@ public class OrderTshirt extends Fragment {
 
         // Radio button handling when a user selects an option
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            /**
+             * Handling of radio button selection in terms of what UI elements are shown.
+             * @param radioGroup group of radio buttons
+             * @param i selected radio button
+             */
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 // Get selected radio button
@@ -102,6 +128,10 @@ public class OrderTshirt extends Fragment {
 
         // Set a listener on the the camera image
         mCameraImage.setOnClickListener(new View.OnClickListener() {
+            /**
+             * User clicks the image in UI
+             * @param v view
+             */
             @Override
             public void onClick(View v) {
                 dispatchTakePictureIntent(v);
@@ -110,6 +140,10 @@ public class OrderTshirt extends Fragment {
 
         // Set a listener for when user clicks the SUBMIT ORDER button
         mSendButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * User clicks the SUBMIT ORDER btn in UI
+             * @param v view
+             */
             @Override
             public void onClick(View v) {
                 attemptSendEmail(v);
@@ -135,25 +169,45 @@ public class OrderTshirt extends Fragment {
         return root;
     }
 
+    /**
+     * Sets the delivery field's visibility to true
+     */
     private void showDeliveryEditField()
     {
         mEditDelivery.setVisibility(View.VISIBLE);
     }
+
+    /**
+     * Sets the delivery field's visibility to false
+     * Clears the delivery field's text
+     */
     private void hideAndClearDeliveryEditField()
     {
         mEditDelivery.setVisibility(View.INVISIBLE);
         mEditDelivery.setText("");
     }
 
+    /**
+     * Sets the collection label and spinner's visibility to true
+     */
     private void showCollectionDetails() {
         mCollectionTextView.setVisibility(View.VISIBLE);
         mCollectionDaysSpinner.setVisibility(View.VISIBLE);
     }
+
+    /**
+     * Sets the collection label and spinner's visibility to false
+     */
     private void hideCollectionDetails() {
         mCollectionTextView.setVisibility(View.INVISIBLE);
         mCollectionDaysSpinner.setVisibility(View.INVISIBLE);
     }
 
+    /**
+     * Opens the activity to capture a photo and has given permission
+     * If user has not yet given permission, then redirected to appropriate method
+     * @param v view
+     */
     // Open camera intent after clicking image in UI
     private void dispatchTakePictureIntent(View v)
     {
@@ -168,6 +222,16 @@ public class OrderTshirt extends Fragment {
     }
 
     // After a photo has been taken and the tick clicked in UI
+    /**
+     * Attempts to show image in UI, save image in file system and populate photo class variable.
+     * @param requestCode The integer request code originally supplied to
+     *                    startActivityForResult(), allowing you to identify who this
+     *                    result came from.
+     * @param resultCode The integer result code returned by the child activity
+     *                   through its setResult().
+     * @param data An Intent, which can return result data to the caller
+     *               (various data can be attached to Intent "extras").
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -214,11 +278,19 @@ public class OrderTshirt extends Fragment {
     }
 
     // Ask permission to use device storage
+    /**
+     * Asks user permission to use external storage in device.
+     */
     private void askStoragePermission() {
         ActivityCompat.requestPermissions(getActivity(), new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE);
     }
 
     // User wants to submit the order / send the email
+    /**
+     * Verifies user fulfills requirements for creating email from passed data.
+     * If user has data missing, toast message is shown, prompting user to insert said missing data.
+     * @param v
+     */
     private void attemptSendEmail(View v)
     {
         // Determine if all criteria are met for submission of order
@@ -235,6 +307,11 @@ public class OrderTshirt extends Fragment {
     }
 
     // Create and populate the email, then open the email app
+    /**
+     * Creates email from user inserted data.
+     * Starts email activity if successful.
+     * If not email app is present, user shown a error toast message.
+     */
     private void createEmail()
     {
         // Declare intent to send an email (only email applications are selected with ACTION_SENDTO)
@@ -260,6 +337,10 @@ public class OrderTshirt extends Fragment {
     }
 
     // Returns the email body message
+    /**
+     * Creates body of email message from data inserted by user.
+     * @return string of email body
+     */
     private String createEmailBody()
     {
         String orderMessage = "";
