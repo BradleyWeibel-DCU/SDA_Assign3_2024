@@ -9,19 +9,19 @@ The app is stable, goes slightly beyond (in certain aspects) what was required i
 - A total coast is calculated on shirt type and shown in the order page and email ((shirt type price x amount) + delivery).
 
 **Screencasts on how certain aspects work:**
-Task 3 screencast: Weibel (2024) posted 'SDA A3 2024 Task 3'.
-Task 5 screencast: Weibel (2024) posted a slightly too long video due to a bad stutter, 'SDA A3 2024 Task 5'.
+- Task 3 screencast: Weibel (2024) posted 'SDA A3 2024 Task 3'.
+- Task 5 screencast: Weibel (2024) posted a slightly too long video due to a bad stutter, 'SDA A3 2024 Task 5'.
 
 **All images/icons used in the app are listed here:**
-Welcome image: Pexels (2016)
-T-Shirt: Creativebin (2017)
-Collared shirt: Creativebin (2017)
-Tank top: Khaleeq (2023)
-V-Neck: Molina (2016)
-Long shirt: uxwing (2024)
-Long sleeve shirt: Dogar (2024)
-Heavy shirt: Vectorgraphit (2023)
-Workout shirt: Dude With Food (2019)
+- Welcome image: Pexels (2016)
+- T-Shirt: Creativebin (2017)
+- Collared shirt: Creativebin (2017)
+- Tank top: Khaleeq (2023)
+- V-Neck: Molina (2016)
+- Long shirt: uxwing (2024)
+- Long sleeve shirt: Dogar (2024)
+- Heavy shirt: Vectorgraphit (2023)
+- Workout shirt: Dude With Food (2019)
 
 **Code that was received from online recourses:**
 - How to show a toast message when clicking an entry in the recycle view: Dr Mido (2022)
